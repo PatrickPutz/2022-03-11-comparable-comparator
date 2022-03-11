@@ -2,6 +2,7 @@ package sorting.ue.carts;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class CartDemo {
 
@@ -27,10 +28,22 @@ public class CartDemo {
         Collections.sort(carts, new CartTotalItemsComparator());
         System.out.println("Total Items Comparator " + carts.toString());
 
+        // anonyme Klassen verwenden
+        Collections.sort(carts, new Comparator<Cart>() {
+            @Override
+            public int compare(Cart o1, Cart o2) {
+                return Integer.compare(o2.getNumArticles(), o1.getNumArticles());
+            }
+        });
+        System.out.println("Number Articles = " + carts.toString());
 
+        // Lambda Expression
+        Collections.sort(carts, (p1,p2) -> p1.getUsername().compareTo(p2.getUsername()));
+        System.out.println("carts = " + carts);
 
-
-
+        // Lambda über Hilfsklasse = Comparator.comparing
+        Collections.sort(carts, Comparator.comparing(Cart::getUsername));
+        System.out.println("carts = " + carts);
     }
 
 }
