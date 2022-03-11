@@ -2,7 +2,7 @@ package sorting.ue.carts;
 
 import java.util.Objects;
 
-public class Cart {
+public class Cart implements Comparable<Cart>{
 
     private String username;
     private int numArticles;
@@ -69,5 +69,10 @@ public class Cart {
     @Override
     public int hashCode() {
         return Objects.hash(username, numArticles, totalItems, totalAmount);
+    }
+
+    @Override
+    public int compareTo(Cart o) {
+        return Double.compare(o.totalAmount, this.totalAmount);
     }
 }
